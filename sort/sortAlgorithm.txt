@@ -1,0 +1,85 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Sort {
+public:
+
+    void bubbleSort(vector<int> &vec) {
+        if (vec.empty()) return;
+        for (int i = 0; i < vec.size(); i++) {
+            for (int j = vec.size() - 1; j > i; j--) {
+                if (vec[j] < vec[j - 1]) {
+                    vec[j] ^= vec[j - 1];
+                    vec[j - 1] ^= vec[j];
+                    vec[j] ^= vec[j - 1];
+                }
+            }
+        }
+        return; 
+    }
+
+    void selectSort(vector<int> &vec) {
+        if (vec.empty()) return;
+        for (int i = 0; i < vec.size(); i++) {
+            for (int j = i + 1; j < vec.size(); j++) {
+                if (vec[j] < vec[i]) {
+                    vec[i] ^= vec[j];
+                    vec[j] ^= vec[i];
+                    vec[i] ^= vec[j];
+                }
+            }
+        }
+        return;
+    }
+
+
+    void insertSort(vector<int> &vec) {
+        if (vec.empty()) return;
+        for (int i = 0; i < vec.size(); i++) {
+            int j = i;
+            while (j > 0 && vec[i] < vec[j - 1]) j--;
+            vec.insert(vec.begin() + j, vec[i]);
+            vec.erase(vec.begin() + i + 1);
+        }
+    }
+
+
+    void quickSort(vector<int> &vec) {
+        if (vec.empty()) return;
+        quickSort_(vec, 0, vec.size() - 1);
+    }
+    void quickSort_(vector<int> &vec, int left, int right) {
+        if(left >= right) return;
+        int pivotPos = partition(vec, left, right);
+        quickSort_(vec, left, pivotPos - 1);
+        quickSort_(vec, pivotPos + 1, right);
+    }
+    int partition(vector<int> &vec, int left, int right) {
+        int pivotKey = vec[left];
+        while (left < right) {
+            while(left < right && vec[right] >= pivotKey) right--;
+            vec[left] = vec[right];
+            while(left < right && vec[left] <= pivotKey) left++;
+            vec[right] = vec[left];
+        }
+        vec[left] = pivotKey;
+        return left;
+    }
+
+    void 
+};
+
+
+
+int main() {
+    Sort sorter;
+    int arr[] = {7, 2, 1, 9, 8, 5};
+    vector<int> vec(arr, arr + 6);
+    // sorter.bubbleSort(vec);
+    // sorter.selectSort(vec);
+    sorter.quickSort(vec);
+    sorter.insertSort(vec);
+    for_each(vec.begin(), vec.end(), [](const int& val)->void{cout<<val<<endl;});
+    return 1;
+}
