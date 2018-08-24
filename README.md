@@ -1,4 +1,4 @@
 # basicAlgorithm
-sort
-tree traversal
-linked list
+sort  
+tree traversal  
+linked list  
