@@ -1,4 +1,10 @@
 # basicAlgorithm
-sort  
-tree traversal  
+sort 
+
+tree traversal
+
 linked list  
+
+union find
+
+trie
